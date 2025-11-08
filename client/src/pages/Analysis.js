@@ -9,8 +9,7 @@ import {
   Alert,
   Space,
   Input,
-  Button,
-  DatePicker
+  Button
 } from '../components/BasicUI';
 
 const Analysis = () => {

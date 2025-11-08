@@ -9,8 +9,7 @@ import {
   Title, 
   Text,
   Alert,
-  Space,
-  DatePicker
+  Space
 } from '../components/BasicUI';
 
 const Summary = () => {

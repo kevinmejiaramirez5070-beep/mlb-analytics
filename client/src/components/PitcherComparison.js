@@ -10,6 +10,7 @@ const PitcherComparison = ({ game, onAnalyze, onAnalyzeClick }) => {
     if (game && game.mlb_id) {
       fetchPitchers();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [game?.mlb_id]);
 
   const fetchPitchers = async () => {
