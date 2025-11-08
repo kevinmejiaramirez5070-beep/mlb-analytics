@@ -1,0 +1,676 @@
+/* Reset y estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  background: linear-gradient(135deg, #0f1419 0%, #1a2332 100%);
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+/* Header */
+.header {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.logo h1 {
+  color: #0066cc;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  background: rgba(0, 102, 204, 0.1);
+  color: #0066cc;
+}
+
+.nav-link.active {
+  background: #0066cc;
+  color: white;
+}
+
+/* Main content */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Page containers */
+.home-page, .analysis-page, .summary-page {
+  min-height: calc(100vh - 70px);
+}
+
+/* Title styles */
+.basic-title {
+  color: #ffffff;
+  margin-bottom: 30px;
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.basic-title.level-1 { font-size: 32px; }
+.basic-title.level-2 { font-size: 28px; }
+.basic-title.level-3 { font-size: 24px; }
+
+/* Card styles - MLB style */
+.basic-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    0 4px 16px rgba(0, 102, 204, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.basic-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #0066cc, transparent);
+  opacity: 0.7;
+}
+
+.basic-card-title {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #0066cc;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.basic-card-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #0066cc, transparent);
+}
+
+/* Game card styles */
+.game-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  border-color: #0066cc;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.game-teams {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.team-info {
+  text-align: center;
+}
+
+.team-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.team-record {
+  font-size: 14px;
+  color: #b0b0b0;
+}
+
+.team-logo {
+  width: 40px;
+  height: 40px;
+  background: #0066cc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.game-time {
+  color: #0066cc;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.game-location {
+  color: #b0b0b0;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.game-pitchers {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.pitcher-info {
+  text-align: center;
+  flex: 1;
+}
+
+.pitcher-name {
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.pitcher-stats {
+  font-size: 14px;
+  color: #b0b0b0;
+}
+
+.game-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Button styles - Professional MLB Design */
+.basic-button {
+  position: relative;
+  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+  color: white;
+  border: none;
+  padding: 18px 36px;
+  border-radius: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  box-shadow: 
+    0 6px 20px rgba(0, 102, 204, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  min-width: 180px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.basic-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.basic-button:hover::before {
+  left: 100%;
+}
+
+.basic-button:hover {
+  background: linear-gradient(135deg, #0077e6 0%, #0066cc 100%);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 12px 32px rgba(0, 102, 204, 0.4),
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.basic-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 16px rgba(0, 102, 204, 0.3);
+}
+
+.basic-button:disabled {
+  background: linear-gradient(135deg, #666 0%, #555 100%);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+.basic-button.primary {
+  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+  border: 2px solid #0066cc;
+}
+
+.basic-button.primary:hover {
+  background: linear-gradient(135deg, #0077e6 0%, #0066cc 100%);
+  border-color: #0077e6;
+}
+
+.basic-button.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.basic-button.secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.basic-button.success {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  border: 2px solid #28a745;
+}
+
+.basic-button.success:hover {
+  background: linear-gradient(135deg, #34ce57 0%, #28a745 100%);
+  border-color: #34ce57;
+}
+
+.basic-button.warning {
+  background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+  border: 2px solid #ffc107;
+  color: #000;
+}
+
+.basic-button.warning:hover {
+  background: linear-gradient(135deg, #ffca2c 0%, #ffc107 100%);
+  border-color: #ffca2c;
+}
+
+.basic-button.danger {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  border: 2px solid #dc3545;
+}
+
+.basic-button.danger:hover {
+  background: linear-gradient(135deg, #e74c3c 0%, #dc3545 100%);
+  border-color: #e74c3c;
+}
+
+/* Loading state for buttons */
+.basic-button.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.basic-button.loading::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: button-spin 1s linear infinite;
+  margin-left: 8px;
+}
+
+@keyframes button-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Table styles */
+.basic-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.basic-table th {
+  background: rgba(0, 102, 204, 0.2);
+  color: #ffffff;
+  padding: 16px 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.basic-table td {
+  padding: 16px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.basic-table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Tag styles */
+.basic-tag {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.basic-tag.red { background: #dc3545; color: white; }
+.basic-tag.orange { background: #fd7e14; color: white; }
+.basic-tag.blue { background: #0066cc; color: white; }
+.basic-tag.default { background: rgba(255, 255, 255, 0.1); color: #ffffff; }
+
+/* Alert styles */
+.basic-alert {
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border-left: 4px solid;
+}
+
+.basic-alert.error {
+  background: rgba(220, 53, 69, 0.1);
+  border-color: #dc3545;
+  color: #ff6b6b;
+}
+
+.basic-alert.info {
+  background: rgba(0, 102, 204, 0.1);
+  border-color: #0066cc;
+  color: #74b9ff;
+}
+
+/* Input styles */
+.basic-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #ffffff;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.basic-input:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.basic-input::placeholder {
+  color: #b0b0b0;
+}
+
+/* Date picker styles */
+.basic-date-picker {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+/* Space component */
+.basic-space {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.basic-space.vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.basic-space.large {
+  gap: 24px;
+}
+
+.basic-space.wrap {
+  flex-wrap: wrap;
+}
+
+/* Loading state */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  color: #0066cc;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 15px;
+  }
+  
+  .nav {
+    gap: 15px;
+  }
+  
+  .nav-link {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .main-content {
+    padding: 15px;
+  }
+  
+  .basic-title {
+    font-size: 24px;
+  }
+  
+  .game-teams {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .game-pitchers {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .game-actions {
+    flex-direction: column;
+  }
+  
+  .basic-table {
+    font-size: 14px;
+  }
+  
+  .basic-table th,
+  .basic-table td {
+    padding: 12px 8px;
+  }
+}
+
+/* Select styles */
+select.basic-input {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+select.basic-input option {
+  background: #1a2332;
+  color: #ffffff;
+  padding: 12px 16px;
+  border: none;
+}
+
+select.basic-input:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+/* Dropdown container */
+.basic-select-container {
+  position: relative;
+  display: inline-block;
+}
+
+.basic-select {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  min-width: 200px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.basic-select:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.basic-select option {
+  background: #1a2332;
+  color: #ffffff;
+  padding: 12px 16px;
+  border: none;
+  font-size: 14px;
+}
+
+.basic-select option:hover {
+  background: #0066cc;
+}
+
+.basic-select option:checked {
+  background: #0066cc;
+  color: #ffffff;
+}
+
+/* Statistics styles */
+.stat-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0066cc;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #b0b0b0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Analysis factors display */
+.factors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.factor-item {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.factor-name {
+  font-size: 12px;
+  color: #b0b0b0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.factor-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}

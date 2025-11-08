@@ -1,0 +1,4 @@
+# Este es un placeholder para la imagen por defecto
+# En un entorno real, deberías crear una imagen PNG real
+# Por ahora, el componente manejará la falta de imagen con onError
+
