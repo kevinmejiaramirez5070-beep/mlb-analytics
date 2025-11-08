@@ -50,6 +50,24 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Endpoint de debug para verificar variables de entorno
+app.get('/api/debug/env', (req, res) => {
+  res.json({
+    success: true,
+    env: {
+      DB_TYPE: process.env.DB_TYPE || 'NOT_SET',
+      DB_HOST: process.env.DB_HOST || 'NOT_SET',
+      DB_PORT: process.env.DB_PORT || 'NOT_SET',
+      DB_USER: process.env.DB_USER || 'NOT_SET',
+      DB_NAME: process.env.DB_NAME || 'NOT_SET',
+      DB_SSL: process.env.DB_SSL || 'NOT_SET',
+      NODE_ENV: process.env.NODE_ENV || 'NOT_SET',
+      VERCEL: process.env.VERCEL || 'NOT_SET'
+    },
+    note: 'DB_PASSWORD está oculto por seguridad'
+  });
+});
+
 // Ruta para probar la API de MLB
 app.get('/api/test-mlb', async (req, res) => {
   try {
