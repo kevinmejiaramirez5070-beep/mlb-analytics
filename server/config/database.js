@@ -7,9 +7,28 @@ if (dbType === 'postgres') {
   // Configuración PostgreSQL (Supabase)
   const { Pool } = require('pg');
   
+  // Usar Connection Pooler de Supabase para Vercel (resuelve problemas de DNS)
+  // El pooler usa el mismo hostname pero con .pooler en lugar de .supabase.co
+  const dbHost = process.env.DB_HOST || 'localhost';
+  const usePooler = process.env.VERCEL === '1' || process.env.USE_POOLER === 'true';
+  
+  // Si estamos en Vercel, usar el Connection Pooler
+  let finalHost = dbHost;
+  let finalPort = process.env.DB_PORT || 5432;
+  
+  if (usePooler && dbHost.includes('.supabase.co')) {
+    // Convertir hostname directo a pooler: db.xxxxx.supabase.co -> db.xxxxx.pooler.supabase.com
+    finalHost = dbHost.replace('.supabase.co', '.pooler.supabase.com');
+    finalPort = 6543; // Puerto del pooler
+    console.log('🔗 Usando Connection Pooler de Supabase para Vercel');
+    console.log('   Host original:', dbHost);
+    console.log('   Host pooler:', finalHost);
+    console.log('   Puerto pooler:', finalPort);
+  }
+  
   const dbConfig = {
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
+    host: finalHost,
+    port: finalPort,
     user: process.env.DB_USER || 'postgres',
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME || 'postgres',
