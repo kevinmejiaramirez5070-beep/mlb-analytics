@@ -44,7 +44,9 @@ if (dbType === 'postgres') {
     ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
     max: 20,
     idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
+    connectionTimeoutMillis: 10000, // Aumentar timeout
+    // Forzar IPv4 si es necesario
+    family: 4, // Usar solo IPv4
   };
 
   pool = new Pool(dbConfig);
