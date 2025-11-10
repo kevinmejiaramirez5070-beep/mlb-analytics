@@ -11,31 +11,27 @@ if (dbType === 'postgres') {
   // El pooler usa el mismo hostname pero con .pooler en lugar de .supabase.co
   const dbHost = process.env.DB_HOST || 'localhost';
   
-  // Detectar si estamos en Vercel (múltiples formas de detectar)
-  const isVercel = process.env.VERCEL === '1' || 
-                   process.env.VERCEL === 'true' || 
-                   process.env.VERCEL_ENV !== undefined ||
-                   process.env.NODE_ENV === 'production';
+  console.log('🔍 Configurando conexión PostgreSQL:');
+  console.log('   DB_HOST original:', dbHost);
+  console.log('   DB_PORT original:', process.env.DB_PORT);
+  console.log('   NODE_ENV:', process.env.NODE_ENV);
+  console.log('   VERCEL:', process.env.VERCEL);
   
-  // Siempre usar pooler si el hostname es de Supabase (recomendado para serverless)
-  const usePooler = process.env.USE_POOLER === 'true' || 
-                    (isVercel && dbHost.includes('.supabase.co')) ||
-                    dbHost.includes('.supabase.co'); // Usar pooler por defecto para Supabase
-  
-  // Si estamos en Vercel o usando Supabase, usar el Connection Pooler
+  // SIEMPRE usar pooler si el hostname es de Supabase (recomendado para serverless)
   let finalHost = dbHost;
   let finalPort = parseInt(process.env.DB_PORT) || 5432;
   
-  if (usePooler && dbHost.includes('.supabase.co')) {
+  // Convertir automáticamente hostname de Supabase a pooler
+  if (dbHost.includes('.supabase.co')) {
     // Convertir hostname directo a pooler: db.xxxxx.supabase.co -> db.xxxxx.pooler.supabase.com
     finalHost = dbHost.replace('.supabase.co', '.pooler.supabase.com');
     finalPort = 6543; // Puerto del pooler
-    console.log('🔗 Usando Connection Pooler de Supabase');
+    console.log('🔗 CONVIRTIENDO a Connection Pooler de Supabase');
     console.log('   Host original:', dbHost);
     console.log('   Host pooler:', finalHost);
     console.log('   Puerto pooler:', finalPort);
-    console.log('   VERCEL env:', process.env.VERCEL);
-    console.log('   NODE_ENV:', process.env.NODE_ENV);
+  } else {
+    console.log('ℹ️ No es hostname de Supabase, usando conexión directa');
   }
   
   const dbConfig = {
