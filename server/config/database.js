@@ -11,15 +11,19 @@ if (dbType === 'postgres') {
   // El pooler resuelve problemas de DNS en funciones serverless
   const dbHost = process.env.DB_HOST || 'localhost';
   
-  // SIEMPRE convertir hostname de Supabase a pooler
+  // SIEMPRE convertir hostname de Supabase a pooler (solo si no es ya pooler)
   let finalHost = dbHost;
   let finalPort = parseInt(process.env.DB_PORT) || 5432;
   
   // Convertir automáticamente hostname de Supabase a pooler
-  if (dbHost && dbHost.includes('.supabase.co')) {
+  // Solo convertir si NO es ya un hostname de pooler
+  if (dbHost && dbHost.includes('.supabase.co') && !dbHost.includes('.pooler.supabase.com')) {
     // Convertir: db.xxxxx.supabase.co -> db.xxxxx.pooler.supabase.com
     finalHost = dbHost.replace('.supabase.co', '.pooler.supabase.com');
     finalPort = 6543; // Puerto del pooler
+  } else if (dbHost && dbHost.includes('.pooler.supabase.com')) {
+    // Ya es un hostname de pooler, usar puerto 6543
+    finalPort = 6543;
   }
   
   console.log('='.repeat(50));
