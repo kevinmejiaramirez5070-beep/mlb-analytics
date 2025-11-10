@@ -46,6 +46,13 @@ if (dbType === 'postgres') {
     connectionTimeoutMillis: 2000,
   };
 
+  console.log('📋 Configuración final de conexión:');
+  console.log('   host:', dbConfig.host);
+  console.log('   port:', dbConfig.port);
+  console.log('   user:', dbConfig.user);
+  console.log('   database:', dbConfig.database);
+  console.log('   ssl:', dbConfig.ssl);
+
   pool = new Pool(dbConfig);
 
   // Función para convertir parámetros de MySQL (?) a PostgreSQL ($1, $2, ...)
