@@ -7,32 +7,29 @@ if (dbType === 'postgres') {
   // Configuración PostgreSQL (Supabase)
   const { Pool } = require('pg');
   
-  // Usar Connection Pooler de Supabase para Vercel (resuelve problemas de DNS)
-  // El pooler usa el mismo hostname pero con .pooler en lugar de .supabase.co
+  // FORZAR uso de Connection Pooler de Supabase para Vercel
+  // El pooler resuelve problemas de DNS en funciones serverless
   const dbHost = process.env.DB_HOST || 'localhost';
   
-  console.log('🔍 Configurando conexión PostgreSQL:');
-  console.log('   DB_HOST original:', dbHost);
-  console.log('   DB_PORT original:', process.env.DB_PORT);
-  console.log('   NODE_ENV:', process.env.NODE_ENV);
-  console.log('   VERCEL:', process.env.VERCEL);
-  
-  // SIEMPRE usar pooler si el hostname es de Supabase (recomendado para serverless)
+  // SIEMPRE convertir hostname de Supabase a pooler
   let finalHost = dbHost;
   let finalPort = parseInt(process.env.DB_PORT) || 5432;
   
   // Convertir automáticamente hostname de Supabase a pooler
-  if (dbHost.includes('.supabase.co')) {
-    // Convertir hostname directo a pooler: db.xxxxx.supabase.co -> db.xxxxx.pooler.supabase.com
+  if (dbHost && dbHost.includes('.supabase.co')) {
+    // Convertir: db.xxxxx.supabase.co -> db.xxxxx.pooler.supabase.com
     finalHost = dbHost.replace('.supabase.co', '.pooler.supabase.com');
     finalPort = 6543; // Puerto del pooler
-    console.log('🔗 CONVIRTIENDO a Connection Pooler de Supabase');
-    console.log('   Host original:', dbHost);
-    console.log('   Host pooler:', finalHost);
-    console.log('   Puerto pooler:', finalPort);
-  } else {
-    console.log('ℹ️ No es hostname de Supabase, usando conexión directa');
   }
+  
+  console.log('='.repeat(50));
+  console.log('🔍 CONFIGURACIÓN DE BASE DE DATOS:');
+  console.log('   DB_HOST original:', dbHost);
+  console.log('   DB_HOST final:', finalHost);
+  console.log('   DB_PORT final:', finalPort);
+  console.log('   DB_USER:', process.env.DB_USER);
+  console.log('   DB_NAME:', process.env.DB_NAME);
+  console.log('='.repeat(50));
   
   const dbConfig = {
     host: finalHost,
@@ -45,13 +42,6 @@ if (dbType === 'postgres') {
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,
   };
-
-  console.log('📋 Configuración final de conexión:');
-  console.log('   host:', dbConfig.host);
-  console.log('   port:', dbConfig.port);
-  console.log('   user:', dbConfig.user);
-  console.log('   database:', dbConfig.database);
-  console.log('   ssl:', dbConfig.ssl);
 
   pool = new Pool(dbConfig);
 
